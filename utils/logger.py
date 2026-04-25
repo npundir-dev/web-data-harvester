@@ -14,8 +14,9 @@ log_file = os.path.join(log_folder, "harvester.log")
 logging.basicConfig(
     level=log_level,
     format="%(asctime)s — %(levelname)s — %(message)s",
-    handlers=[logging.FileHandler(log_file), logging.StreamHandler()]
+    handlers=[logging.FileHandler(log_file), logging.StreamHandler()],
 )
+
 
 def get_logger(name: str) -> logging.Logger:
     return logging.getLogger(name)

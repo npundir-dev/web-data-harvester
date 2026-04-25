@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 
 load_dotenv()
 
+
 class Config:
     BASE_URL = "http://books.toscrape.com"
     BOOKS_PAGE = "http://books.toscrape.com/catalogue"
@@ -11,7 +12,7 @@ class Config:
         "title": "h3 a",
         "price": "p.price_color",
         "rating": "p.star-rating",
-        "availability": "p.instock.availability"
+        "availability": "p.instock.availability",
     }
     OUTPUT_DIR = os.getenv("OUTPUT_DIR", "data")
     CSV_FILE = os.path.join(OUTPUT_DIR, "books.csv")
@@ -27,11 +28,14 @@ class Config:
     LOG_FOLDER = os.getenv("LOG_FOLDER", "logs")
 
     @classmethod
-    def validate(cls,required=None):
+    def validate(cls, required=None):
         """Check all required configs are present"""
         if required is None:
-            required = ["BASE_URL","SELECTORS",]
-        missing = [key for key in required if not getattr(cls, key,None)]
+            required = [
+                "BASE_URL",
+                "SELECTORS",
+            ]
+        missing = [key for key in required if not getattr(cls, key, None)]
         if missing:
             raise ValueError(f"Missing required config: {missing}")
         os.makedirs(cls.OUTPUT_DIR, exist_ok=True)
